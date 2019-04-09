@@ -4,7 +4,7 @@ goal: insert vowels in text that has no vowels (unless word starts with vowel)
 
 idea:
   - precompute double metaphones for dictionary words
-  - precompute voweless, sorted versions of dictionary words
+  - precompute voweless versions of dictionary words
   - at runtime, compute double metaphone for input word
   - if double metaphone is null (e.g. `metaphone('w')`), get metaphone for word + 'a'
   - filter dictionary by words whose voweless, sorted representation match input word (sorted)
