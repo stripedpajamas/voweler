@@ -13,4 +13,5 @@ const vowelizeWord = (word) => {
   return matches.slice(0, 10) // 10 best guesses
 }
 
-console.log(vowelizeWord('dcdr'))
+
+module.exports = vowelizeWord
