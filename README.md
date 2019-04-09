@@ -9,7 +9,7 @@ status: doesn't work great
 ## use
 ```bash
 $ npx voweler hppy brthdy
-hypo berthed
+happy birthday
 ```
 
 or import to your project (why?)
