@@ -5,13 +5,21 @@ const words = require('./words.json')
 const vowelizeWord = (word) => {
   const wordMeta = metaphone(word)
   const matches = Object.keys(words)
-    .map((word) => ({ // map dictionary to distance from this word
+  .filter((dictionaryWord) => dictionaryWord.startsWith(word[0]))
+  .map((word) => ({ // map dictionary to distance from this word
       word,
       distance: leven(words[word], wordMeta, true)
     }))
     .sort((a, b) => a.distance - b.distance) // sort by distance
-  return matches.slice(0, 10) // 10 best guesses
+  return matches[0].word // best guess
 }
 
+const vowelizeSentence = (sentence) => {
+  return sentence
+    .replace(/[^A-Za-z\s]/g, '') // take out the trash
+    .split(' ') // break up
+    .map(vowelizeWord) // find the missing pieces
+    .join(' ') // lick and stick
+}
 
-module.exports = vowelizeWord
+module.exports = vowelizeSentence
