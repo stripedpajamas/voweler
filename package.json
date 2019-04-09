@@ -1,6 +1,6 @@
 {
   "name": "voweler",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "insert vowels",
   "main": "index.js",
   "bin": {
