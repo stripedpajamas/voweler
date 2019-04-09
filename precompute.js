@@ -6,7 +6,7 @@ const fs = require('fs')
 const metaphone = require('metaphone')
 
 const output = fs.readFileSync('./words.txt', 'utf8')
-  .split('\r\n') // windows bs
+  .split('\n')
   .reduce((output, word) => {
     output[word] = metaphone(word)
     return output
