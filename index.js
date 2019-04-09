@@ -4,7 +4,10 @@ const words = require('./words.json')
 const strip = require('./strip')
 
 const vowelizeWord = (word) => {
-  const wordMeta = metaphone(word)
+  let wordMeta = metaphone(word)
+  if (wordMeta.some(m => !m)) {
+    wordMeta = metaphone(word + 'a')
+  }
   const strippedWord = strip(word)
   const matches = Object.keys(words)
     .filter((dword) => words[dword].v === strippedWord)
@@ -14,8 +17,16 @@ const vowelizeWord = (word) => {
           .map((meta, i) => leven(meta, wordMeta[i], true))
           .reduce((sum, distance) => sum + distance, 0) / 2
       }))
-      .sort((a, b) => a.distance - b.distance) // sort by distance
-  return matches[0].word // best guess
+  if (!matches.length) return '?'
+  let candidates = []
+  let lowestScore = 0
+  while (!candidates.length) {
+    // find subset of matches with lowest score
+    candidates = matches.filter((match) => match.distance <= lowestScore)
+    lowestScore++
+  }
+  // since the wordlist is sorted by usage, the top should be a winner
+  return (candidates[0] || {}).word || '?' // best guess
 }
 
 const vowelizeSentence = (sentence) => {
