@@ -3,7 +3,7 @@
  */
 
 const fs = require('fs')
-const metaphone = require('metaphone')
+const metaphone = require('double-metaphone')
 
 const output = fs.readFileSync('./words.txt', 'utf8')
   .split('\n')
